@@ -25,12 +25,12 @@ public class SortArrayList {
 		System.out.println(test);
 	}
 	public static <E extends Comparable<E>> void sort(ArrayList<E> list) {
-		Comparable[] array = new Comparable[list.size()];
+		E[] array = (E[])new Comparable[list.size()];
 		for(int i = 0; i < array.length; i++) {
 			array[i] = list.remove(0);
 			//System.out.println(list);
 		}
-		Comparable min, temp;
+		E min, temp;
 		int minIndex;
 		for(int i = 0; i < array.length-1; i++) {
 			min = array[i];
@@ -45,8 +45,8 @@ public class SortArrayList {
 			array[i] = min;
 			array[minIndex] = temp;
 		}
-		for(Comparable e: array) {
-			list.add((E) e);
+		for(E e: array) {
+			list.add(e);
 		}
 	}
 }

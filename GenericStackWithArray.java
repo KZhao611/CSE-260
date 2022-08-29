@@ -22,17 +22,20 @@ public class GenericStackWithArray<E> {
 		}
 		System.out.println(one.isEmpty());
 	}
-	private Object[] list = new Object[1];
+	private E[] list;
 	private int index = 0;
-	public int getSize() {
-		return list.length;
+	public GenericStackWithArray() {
+		list = (E[])new Object[1];
 	}
-	public Object peek() {
+	public int getSize() {
+		return index;
+	}
+	public E peek() {
 		return list[index-1];
 	}
-	public void push(Object o) {
-		if(index == getSize()) {
-			Object[] temp = new Object[getSize()*2];
+	public void push(E o) {
+		if(index == list.length) {
+			E[] temp = (E[])(new Object[getSize()*2]);
 			for(int i = 0; i < getSize(); i++) {
 				temp[i] = list[i];
 			}
@@ -40,8 +43,8 @@ public class GenericStackWithArray<E> {
 		}
 		list[index++] = o;
 	}
-	public Object pop() {
-		Object o = list[--index];
+	public E pop() {
+		E o = list[--index];
 		list[index] = null;
 		return o;
 	}
@@ -49,7 +52,7 @@ public class GenericStackWithArray<E> {
 		return index == 0;
 	}
 	@Override // Java annotation: also used at compile time to
-		public String toString() { // detect override errors
+	public String toString() { // detect override errors
 		String ret = "stack: ";
 		for(Object e: list) {
 			ret += e + " ";
